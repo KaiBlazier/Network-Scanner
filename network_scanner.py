@@ -18,6 +18,13 @@ def get_vendor(mac):
     # You can use an API or a local database to get the actual vendor information
     return "Unknown Vendor"
 
+def save_to_file(clients, filename):
+    with open(filename, 'w', newline='') as file:
+        writer = csv.DictWriter(file, fieldnames=['ip', 'mac', 'vendor']) 
+        writer.writeheader() 
+        for client in clients:
+            writer.writerow(client)
+
 if __name__ == "__main__":
     ip_range = "192.168.1.1/24"
     clients = scan(ip_range)
